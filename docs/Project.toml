@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+YaoBlocksQASM = "0d67dbe6-922f-48f4-afaf-3100500b49df"
