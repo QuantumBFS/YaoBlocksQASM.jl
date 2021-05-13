@@ -1,5 +1,9 @@
 module YaoBlocksQASM
 
-# Write your package code here.
+export yaotoqasm
+
+using YaoBlocks
+
+include("qasm.jl")
 
 end
