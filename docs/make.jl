@@ -1,6 +1,6 @@
 using YaoBlocksQASM, DocThemeIndigo
 using Documenter
-indigo = DocThemeIndigo.install(YaoBlocksQobj)
+indigo = DocThemeIndigo.install(YaoBlocksQASM)
 
 makedocs(;
     modules=[YaoBlocksQASM],
