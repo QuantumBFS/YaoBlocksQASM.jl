@@ -10,7 +10,7 @@ using OpenQASM.RBNF: Token
 
     - `qc`: A `ChainBlock`(circuit that is to be run).
     - `ncreg` (optional) : Number of classical registers
-     While performing operations like measuring, one can input desired number of classical regs. Defaults to 1.
+    While performing operations like measuring, one can input desired number of classical regs(each size equal to number of qubits). Defaults to 1. 
  
 """
 function yaotoqasm(qc::AbstractBlock{N}, ncreg::Int = 1) where N
@@ -34,7 +34,7 @@ end
 
 function generate_defs(prog, nq::Int, ncreg::Int) 
     qregs = RegDecl(Token{:reserved}("qreg"), Token{:type}("q"), Token{:int}("$nq"))
-    cregs = collect(RegDecl(Token{:reserved}("creg"), Token{:type}("c$i"), Token{:int}("1")) for i in 1:ncreg)
+    cregs = collect(RegDecl(Token{:reserved}("creg"), Token{:type}("c$i"), Token{:int}("$nq")) for i in 1:ncreg)
     push!(prog, Include(Bit("\"qelib1.inc\"")), qregs, cregs...)
 end
 
@@ -59,8 +59,14 @@ function generate_prog!(prog, m::YaoBlocks.Measure{N}, locs, controls) where N
     (m.operator isa ComputationalBasis) || error("measuring an operator is not supported")
     # (m.postprocess isa NoPostProcess) || error("postprocessing is not supported")
     (length(controls) == 0) || error("controlled measure is not supported")
-    # for i in 
-    push!(prog, Measure(qubits = mlocs, memory = zeros(length(mlocs))))
+    
+    # can be improved
+    for i in mlocs
+        cargs = Bit("c1", i)
+        qargs = Bit("q", i) 
+        inst = Types.Measure(qargs, cargs)
+        push!(prog, inst)
+    end
 end
 
 # IBMQ Chip only supports ["id", "u1", "u2", "u3", "cx"]
