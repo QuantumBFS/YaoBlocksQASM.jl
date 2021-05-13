@@ -1,9 +1,18 @@
 using OpenQASM.Types 
 using OpenQASM.RBNF: Token
 
-#support custom yao gates to qasm 
+#todo support custom yao gates to qasm 
 
-# if measuring define custom number of classical regs or default= 1 used
+"""
+    yaotoqasm(qc, ncreg)
+
+    Parses an `AbstractBlock` into code based on `OpenQASM`
+
+    - `qc`: A `ChainBlock`(circuit that is to be run).
+    - `ncreg` (optional) : Number of classical registers
+     While performing operations like measuring, one can input desired number of classical regs. Defaults to 1.
+ 
+"""
 function yaotoqasm(qc::AbstractBlock{N}, ncreg::Int = 1) where N
     prog = generate_prog(qc, ncreg)
     MainProgram(v"2", prog)
@@ -12,7 +21,7 @@ end
 """
     generate_prog(qc)
 
-    Parses the YaoIR into a list of IBMQ supported progructions
+    Parses the YaoIR into a list of `QASM` instructions
 
     - `qc`: A `ChainBlock`(circuit that is to be run).
 """
