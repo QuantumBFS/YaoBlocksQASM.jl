@@ -1,23 +1,22 @@
-using YaoBlocksQASM
+using YaoBlocksQASM, DocThemeIndigo
 using Documenter
-
-DocMeta.setdocmeta!(YaoBlocksQASM, :DocTestSetup, :(using YaoBlocksQASM); recursive=true)
+indigo = DocThemeIndigo.install(YaoBlocksQASM)
 
 makedocs(;
     modules=[YaoBlocksQASM],
     authors="Arsh Sharma",
-    repo="https://github.com/Sov-trotter/YaoBlocksQASM.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/QuantumBFS/YaoBlocksQASM.jl/blob/{commit}{path}#{line}",
     sitename="YaoBlocksQASM.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://Sov-trotter.github.io/YaoBlocksQASM.jl",
+        canonical="https://QuantumBFS.github.io/YaoBlocksQASM.jl",
         assets=String[],
     ),
     pages=[
-        "Home" => "index.md",
+        "Quickstart" => "index.md",
     ],
 )
 
 deploydocs(;
-    repo="github.com/Sov-trotter/YaoBlocksQASM.jl",
+    repo="github.com/QuantumBFS/YaoBlocksQASM.jl",devbranch = "main",
 )
