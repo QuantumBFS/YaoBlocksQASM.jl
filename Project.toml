@@ -9,6 +9,7 @@ YaoBlocks = "418bc28f-b43b-5e0b-a6e7-61bbc1a2c1df"
 
 [compat]
 OpenQASM = "2.1"
+YaoBlocks = "0.11"
 julia = "1.6"
 
 [extras]
