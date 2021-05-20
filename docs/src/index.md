@@ -20,7 +20,7 @@ qc = chain(3, put(1=>X), put(2=>Y) ,put(3=>Z),
 2) Convert it to OpenQASM compatible program
 
 ```julia
-ast = yaotoqasm(qc, 1)
+ast = convert_to_qasm(qc, 1)
 ```
 
 ## API References

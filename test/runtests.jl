@@ -45,7 +45,7 @@ using Test
         put(2 => Rx(0.7)),
         Yao.Measure(3),
     )
-    ast1 = yaotoqasm(qc, 1)
+    ast1 = convert_to_qasm(qc, 1)
 
     @test ast.version == ast1.version
 

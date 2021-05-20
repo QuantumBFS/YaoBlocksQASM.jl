@@ -4,7 +4,7 @@ using OpenQASM.RBNF: Token
 #todo support custom yao gates to qasm 
 
 """
-    yaotoqasm(qc, ncreg)
+    convert_to_qasm(qc, ncreg)
 
 Parses an `AbstractBlock` into code based on the `OpenQASM` spec
 
@@ -12,7 +12,7 @@ Parses an `AbstractBlock` into code based on the `OpenQASM` spec
 - `ncreg` (optional) : Number of classical registers
 While performing operations like measuring, one can input desired number of classical regs(each size equal to number of qubits). Defaults to 1.  
 """
-function yaotoqasm(qc::AbstractBlock{N}, ncreg::Int = 1) where {N}
+function convert_to_qasm(qc::AbstractBlock{N}, ncreg::Int = 1) where {N}
     prog = generate_prog(qc, ncreg)
     MainProgram(v"2", prog)
 end
