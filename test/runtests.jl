@@ -27,14 +27,29 @@ using Test
     """
 
     ast = OpenQASM.parse(qasm)
-    qc = chain(3, put(1=>H), control(2, 3=>X),control(2, 1=>Y),control(1, 3=>Z),
-                put(1=>X) ,swap(2,3),put(1=>I2),put(2=>T), put(3=>Rz(0.7)), put(1=>Z), put(2=>shift(0.7)), 
-                put(3=>Ry(0.7)),   put(1=>Y),put(2=>Rx(0.7)),Yao.Measure(3))
+    qc = chain(
+        3,
+        put(1 => H),
+        control(2, 3 => X),
+        control(2, 1 => Y),
+        control(1, 3 => Z),
+        put(1 => X),
+        swap(2, 3),
+        put(1 => I2),
+        put(2 => T),
+        put(3 => Rz(0.7)),
+        put(1 => Z),
+        put(2 => shift(0.7)),
+        put(3 => Ry(0.7)),
+        put(1 => Y),
+        put(2 => Rx(0.7)),
+        Yao.Measure(3),
+    )
     ast1 = yaotoqasm(qc, 1)
 
     @test ast.version == ast1.version
 
-    for i in 1:length(ast.prog)
+    for i = 1:length(ast.prog)
         @test "$(ast.prog[i])" == "$(ast1.prog[i])"
     end
 end
