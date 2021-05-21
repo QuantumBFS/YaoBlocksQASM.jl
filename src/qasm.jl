@@ -61,10 +61,8 @@ function generate_prog!(prog, blk::ControlBlock{N,GT,C}, locs, controls) where {
 end
 
 function generate_prog!(prog, m::YaoBlocks.Measure{N}, locs, controls) where {N}
-    # memory:  List of memory slots in which to store the measurement results (mustbe the same length as qubits).  
     mlocs = sublocs(m.locations isa AllLocs ? [1:N...] : [m.locations...], locs)
     (m.operator isa ComputationalBasis) || error("measuring an operator is not supported")
-    # (m.postprocess isa NoPostProcess) || error("postprocessing is not supported")
     (length(controls) == 0) || error("controlled measure is not supported")
 
     # can be improved
@@ -76,8 +74,6 @@ function generate_prog!(prog, m::YaoBlocks.Measure{N}, locs, controls) where {N}
     end
 end
 
-# IBMQ Chip only supports ["id", "u1", "u2", "u3", "cx"]
-# x, y, z and control x, y, z, id, t, swap and other primitive gates
 for (GT, NAME, MAXC) in [
     (:XGate, "x", 2),
     (:YGate, "y", 2),
@@ -110,7 +106,6 @@ for (GT, NAME, MAXC) in [
     end
 end
 
-# rotation gates
 for (GT, NAME, PARAMS, MAXC) in [
     (:(RotationGate{1,T,XGate} where {T}), "rx", :(b.theta), 0),
     (:(RotationGate{1,T,YGate} where {T}), "ry", :(b.theta), 0),
