@@ -37,7 +37,7 @@ function generate_defs(prog, nq::Int, ncreg::Int)
         RegDecl(Token{:reserved}("creg"), Token{:type}("c$i"), Token{:int}("$nq")) for
         i = 1:ncreg
     )
-    push!(prog, Include(Bit("\"qelib1.inc\"")), qregs, cregs...)
+    push!(prog, Include(Token{:str}("\"qelib1.inc\"")), qregs, cregs...)
 end
 
 function generate_prog!(prog, qc_simpl::ChainBlock, locs, controls)
