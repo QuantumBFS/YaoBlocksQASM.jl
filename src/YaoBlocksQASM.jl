@@ -1,6 +1,6 @@
 module YaoBlocksQASM
 
-export convert_to_qasm
+export convert_to_qasm, toblocks, @qasm_str
 
 using YaoBlocks
 
